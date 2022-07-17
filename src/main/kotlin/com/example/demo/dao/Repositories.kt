@@ -17,6 +17,9 @@ private const val FIND_CONFLICT_QUERY = """
         WHERE u.email = :email OR u.username = :username 
     """
 
+/**
+ * test
+ */
 interface UserRepository: CrudRepository<User, Long> {
     @Query(value=FIND_USER_QUERY, nativeQuery = true)
     fun findByUsername(@Param("username") username: String) : User?
