@@ -53,11 +53,11 @@ class UserController {
                 return SignupResponse("email_already_exists")
         }
 
-        // 패스워드는 직접적으로 저장하지 않고 password hash를 저장한다. 이 방법으로 패스워드의 직접적인 유출을 막을수 있다.
+        // 패스워드는 직접적으로 저장하지 않고 password hash를 저장한다.. 이 방법으로 패스워드의 직접적인 유출을 막을수 있다.
         val hashedPassword = passwordEncoder.encode(password)
         val user = User(null, username, hashedPassword, Role.USER, email)
         return try {
-            // 새로운 유저를 데이터베이스에 저장하여 유저 등록을 마친다.
+            // 새로운 유저를 데이터베이스에 저장하여 유저 등록을 마친다..
             repository.save(user)
             SignupResponse("signup_succeeded")
         } catch (ex: java.lang.RuntimeException) {
