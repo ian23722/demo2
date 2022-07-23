@@ -61,7 +61,7 @@ class UserController {
             repository.save(user)
             SignupResponse("signup_succeeded")
         } catch (ex: java.lang.RuntimeException) {
-            // 에러가 발생할 경우 (ex. 데이터 베이스 에러) 에러 메세지를 반환한다..
+            // 에러가 발생할 경우 (ex. 데이터 베이스 에러) 에러 메세지를 반환한다...
             // 일반적인 경우 로그 메세지를 남겨 troubleshooting을 가능하게 만들어야 한다..
             SignupResponse("signup_failed")
         }
