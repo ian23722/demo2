@@ -37,13 +37,13 @@ class UserController {
     @PostMapping(path = ["/signup"])
     @ResponseBody
             /**
-             * 새 유저 등록시에는 username과 email이 이미 등록되어 있는것인지 먼저 확인한 후에 등록.
+             * 새 유저 등록시에는 username과 email이 이미 등록되어 있는것인지 먼저 확인한 후에 등록
              */
     fun signup(@RequestParam("username") username: String,
                @RequestParam("password") password: String,
                @RequestParam("email") email: String): SignupResponse {
         // sign up 하려는 username 이나 email 로 등록 되어 있는 유저 목록을 가져온다
-        val existingUsers: List<User> = repository.findByUsernameOrEmail(username, email) ?: listOf()
+        val existingUsers : List<User> = repository.findByUsernameOrEmail(username, email) ?: listOf()
         // 중복된 username이나 email이 있을 경우 새 유저를 등록 시키지 않고 에러 메세지를 반환
         if (existingUsers.isNotEmpty()) {
             val existingUser = existingUsers[0]
@@ -53,11 +53,11 @@ class UserController {
                 return SignupResponse("email_already_exists")
         }
 
-        // 패스워드는 직접적으로 저장하지 않고 password hash를 저장한다.. 이 방법으로 패스워드의 직접적인 유출을 막을수 있다.
+        // 패스워드는 직접적으로 저장하지 않고 password hash를 저장한다. 이 방법으로 패스워드의 직접적인 유출을 막을수 있다.
         val hashedPassword = passwordEncoder.encode(password)
         val user = User(null, username, hashedPassword, Role.USER, email)
         return try {
-            // 새로운 유저를 데이터베이스에 저장하여 유저 등록을 마친다..
+            // 새로운 유저를 데이터베이스에 저장하여 유저 등록을 마친다.
             repository.save(user)
             SignupResponse("signup_succeeded")
         } catch (ex: java.lang.RuntimeException) {
