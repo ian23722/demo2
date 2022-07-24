@@ -37,7 +37,7 @@ class UserController {
     @PostMapping(path = ["/signup"])
     @ResponseBody
             /**
-             * 새 유저 등록시에는 username과 email이 이미 등록되어 있는것인지 먼저 확인한 후에 등록
+             * 새 유저 등록시에는 username과 email이 이미 등록되어 있는것인지 먼저 확인한 후에 등록.
              */
     fun signup(@RequestParam("username") username: String,
                @RequestParam("password") password: String,
