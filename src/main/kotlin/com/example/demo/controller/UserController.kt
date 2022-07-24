@@ -43,7 +43,7 @@ class UserController {
                @RequestParam("password") password: String,
                @RequestParam("email") email: String): SignupResponse {
         // sign up 하려는 username 이나 email 로 등록 되어 있는 유저 목록을 가져온다
-        val existingUsers : List<User> = repository.findByUsernameOrEmail(username, email) ?: listOf()
+        val existingUsers: List<User> = repository.findByUsernameOrEmail(username, email) ?: listOf()
         // 중복된 username이나 email이 있을 경우 새 유저를 등록 시키지 않고 에러 메세지를 반환
         if (existingUsers.isNotEmpty()) {
             val existingUser = existingUsers[0]
@@ -53,7 +53,7 @@ class UserController {
                 return SignupResponse("email_already_exists")
         }
 
-        // 패스워드는 직접적으로 저장하지 않고 password hash를 저장한다. 이 방법으로 패스워드의 직접적인 유출을 막을수 있다.
+        // 패스워드는 직접적으로 저장하지 않고 password hash를 저장한다.. 이 방법으로 패스워드의 직접적인 유출을 막을수 있다.
         val hashedPassword = passwordEncoder.encode(password)
         val user = User(null, username, hashedPassword, Role.USER, email)
         return try {
