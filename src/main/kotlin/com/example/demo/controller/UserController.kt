@@ -44,7 +44,7 @@ class UserController {
                @RequestParam("email") email: String): SignupResponse {
         // sign up 하려는 username 이나 email 로 등록 되어 있는 유저 목록을 가져온다
         val existingUsers : List<User> = repository.findByUsernameOrEmail(username, email) ?: listOf()
-        // 중복된 username이나 email이 있을 경우 새 유저를 등록 시키지 않고 에러 메세지를 반환
+        // 중복된 username이나 email이 있을 경우 새 유저를 등록 시키지 않고 에러 메세지를 반환.
         if (existingUsers.isNotEmpty()) {
             val existingUser = existingUsers[0]
             if (existingUser.username == username)
